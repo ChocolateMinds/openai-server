@@ -1,0 +1,12 @@
+python-dotenv
+streamlit
+openai
+langchain
+PyPDF2
+faiss-cpu
+altair
+tiktoken
+Flask
+
+# Tests
+mock
