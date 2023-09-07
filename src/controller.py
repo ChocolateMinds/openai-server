@@ -14,6 +14,7 @@ app = Flask(__name__)
 
 # Initialize the knowledge base
 knowledge_base = load_pdfs()
+llm = OpenAI()
 
 # REST API endpoint to accept user's question
 @app.route('/ask', methods=['POST'])
@@ -24,8 +25,9 @@ def ask_user():
     
     # Answer the question using the knowledge base
     docs = knowledge_base.similarity_search(user_question)
-    llm = OpenAI()
+    
     chain = load_qa_chain(llm, chain_type="stuff")
+    
     with get_openai_callback() as cb:
         response = chain.run(input_documents=docs, question=user_question)
     
